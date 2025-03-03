@@ -14,14 +14,14 @@ export interface UserListFetchParameters {
 }
 
 export interface UserListFilterParameter {
-  id: String;
-  value: String;
+  id: string;
+  value: string;
 }
 
 export interface UserListFilter {
-  favorite?: Boolean;
-  gender?: String;
-  name?: String;
+  favorite?: boolean;
+  gender?: string;
+  name?: string;
 }
 
 export interface UserListFetchResults {

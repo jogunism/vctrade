@@ -43,12 +43,6 @@ import { capitalizeFirstLetter } from "@utils/string.utils";
 
 export default Vue.extend({
   name: "dropdown_menu",
-  data() {
-    return {
-      dropdownOpen: false,
-      currentValue: this.$props.title,
-    };
-  },
   props: {
     id: {
       type: String,
@@ -62,26 +56,32 @@ export default Vue.extend({
       default: [],
     },
   },
+  components: {
+    ChevronDownIcon,
+  },
   computed: {
     ...mapGetters({
       filter: "user/filter",
     }),
   },
-  components: {
-    ChevronDownIcon,
+  watch: {
+    filter(newFilter) {
+      this.currentValue = !newFilter.gender
+        ? "Gender"
+        : capitalizeFirstLetter(newFilter.gender);
+    },
   },
-
+  data() {
+    return {
+      dropdownOpen: false,
+      currentValue: this.$props.title,
+    };
+  },
   mounted() {
     document.addEventListener("click", this.handleOutsideClick);
-    switch (this.id) {
-      case "gender":
-        this.currentValue =
-          capitalizeFirstLetter(this.filter.gender) ?? this.$props.title;
-        break;
-      case "favorite":
-        // this.currentValue = this.filter.favorite ? "Favorite" ?? this.$props.title;
-        break;
-    }
+    this.currentValue = !this.filter.gender
+      ? "Gender"
+      : capitalizeFirstLetter(this.filter.gender);
   },
   beforeDestroy() {
     document.removeEventListener("click", this.handleOutsideClick);
@@ -89,7 +89,6 @@ export default Vue.extend({
 
   methods: {
     handleItemClick(text: String) {
-      this.currentValue = text === "All" ? this.$props.title : text;
       this.toggleDropdown();
 
       this.$store.dispatch("user/filterUserList", {

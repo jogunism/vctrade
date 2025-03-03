@@ -16,12 +16,7 @@
         </button>
       </div>
       <div class="flex justify-start sm:justify-end">
-        <Dropdown
-          class="mr-1 w-25"
-          :id="'favorite'"
-          :title="'Favorite'"
-          :list="favoriteList"
-        />
+        <FavoriteFilter />
         <Dropdown
           class="mr-1 w-25"
           :id="'gender'"
@@ -141,8 +136,9 @@
 import Vue from "vue";
 import { mapGetters } from "vuex";
 // UI Components
-import Searchbox from "@components/common/Searchbox.vue";
+import FavoriteFilter from "@components/common/FavoriteFilter.vue";
 import Dropdown from "@components/common/Dropdown.vue";
+import Searchbox from "@components/common/Searchbox.vue";
 import FavoriteButton from "@components/common/FavoriteButton.vue";
 import ReloadIcon from "@icons/Reload.vue";
 // Utils
@@ -150,6 +146,25 @@ import { capitalizeFirstLetter } from "@utils/string.utils";
 
 export default Vue.extend({
   name: "user_list",
+  computed: {
+    ...mapGetters({
+      isLoading: "user/isLoading",
+      userList: "user/userList",
+      filter: "user/filter",
+    }),
+  },
+  components: {
+    FavoriteFilter,
+    Dropdown,
+    Searchbox,
+    FavoriteButton,
+    ReloadIcon,
+  },
+  mounted() {
+    if (this.userList.length < 1) {
+      this.fetchUserList();
+    }
+  },
   data() {
     return {
       search: {
@@ -158,28 +173,6 @@ export default Vue.extend({
       genderList: ["All", "Male", "Female"],
       favoriteList: ["All", "Favorite"],
     };
-  },
-  computed: {
-    ...mapGetters({
-      isLoading: "user/isLoading",
-      userList: "user/userList",
-      filter: "user/filter",
-    }),
-  },
-  watch: {},
-  components: {
-    Searchbox,
-    Dropdown,
-    FavoriteButton,
-    ReloadIcon,
-  },
-  mounted() {
-    if (this.userList.length < 1) {
-      this.fetchUserList();
-    }
-
-    console.log(this.userList);
-    console.log(this.filter);
   },
   methods: {
     fetchUserList() {

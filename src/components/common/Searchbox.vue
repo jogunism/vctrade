@@ -7,10 +7,11 @@
     />
     <input
       class="w-full pl-10 p-3 focus:outline-none"
-      v-model="inputText"
       type="text"
       placeholder="user name"
       maxlength="30"
+      v-model="inputText"
+      @keyup.enter="handleEnterKeyup"
     />
     <button
       v-if="inputText"
@@ -24,6 +25,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { mapGetters } from "vuex";
 // UI Components
 import MagnifyingGlassIcon from "@icons/MagnifyingGlass.vue";
 import XMarkIcon from "@icons/XMark.vue";
@@ -31,6 +33,11 @@ import XMarkIcon from "@icons/XMark.vue";
 export default Vue.extend({
   name: "search_box",
   props: {},
+  computed: {
+    ...mapGetters({
+      filter: "user/filter",
+    }),
+  },
   components: {
     MagnifyingGlassIcon,
     XMarkIcon,
@@ -40,9 +47,22 @@ export default Vue.extend({
       inputText: "",
     };
   },
+  mounted() {
+    this.inputText = this.filter?.name ?? "";
+  },
   methods: {
+    handleEnterKeyup() {
+      this.$store.dispatch("user/filterUserList", {
+        id: "name",
+        value: this.inputText.toLowerCase(),
+      });
+    },
     clearInput() {
       this.inputText = "";
+      this.$store.dispatch("user/filterUserList", {
+        id: "name",
+        value: "",
+      });
     },
   },
 });

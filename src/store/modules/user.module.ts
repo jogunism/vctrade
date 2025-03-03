@@ -2,7 +2,7 @@
 import Vue from "vue";
 import { services } from "@store/api";
 import {
-  User, //
+  User,
   UserState,
   UserListFetchParameters,
   UserListFilterParameter,
@@ -10,6 +10,9 @@ import {
 } from "@src/constants";
 import { capitalizeFirstLetter } from "@utils/string.utils";
 
+/**
+ * STATE
+ */
 const state: UserState = {
   isLoading: false,
   userListOrigin: [],
@@ -17,12 +20,18 @@ const state: UserState = {
   filter: {},
 };
 
+/**
+ * GETTERS
+ */
 const getters = {
   isLoading: (state: UserState) => state.isLoading,
   userList: (state: UserState) => state.userList,
   filter: (state: UserState) => state.filter,
 };
 
+/**
+ * ACTIONS
+ */
 const actions = {
   async fetchUserList(
     { commit }: { commit: Function },
@@ -58,7 +67,7 @@ const actions = {
     const _filter = { ...state.filter };
     switch (filter.id) {
       case "favorite":
-        _filter.favorite = filter.value !== "all";
+        _filter.favorite = filter.value === "true";
         break;
       case "gender":
         _filter.gender = filter.value !== "all" ? filter.value : "";
@@ -72,6 +81,9 @@ const actions = {
   },
 };
 
+/**
+ * MUTATIONS
+ */
 const mutations = {
   changeLoadingStatus(state: UserState, status: boolean) {
     state.isLoading = status;
@@ -114,13 +126,12 @@ const mutations = {
   filterUserList(state: UserState, filter: UserListFilter) {
     const _origin = [...state.userListOrigin];
     const _filtered = _origin.filter((user: User) => {
-      // console.log(user.userName);
-      // console.log(
-      //   !state.filter.favorite || (state.filter.favorite && user.isFavorite)
-      // );
       return (
         (!filter.favorite || (filter.favorite && user.isFavorite)) &&
-        (!filter.gender || (filter.gender && user.gender === filter.gender))
+        (!filter.gender || (filter.gender && user.gender === filter.gender)) &&
+        (!filter.name ||
+          (filter.name &&
+            user.userName.toLocaleLowerCase().includes(filter.name)))
       );
     });
 
