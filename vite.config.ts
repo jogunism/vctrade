@@ -14,6 +14,7 @@ export default defineConfig({
       "@utils": path.resolve(__dirname, "src/utils"),
       "@store": path.resolve(__dirname, "src/store"),
       "@components": path.resolve(__dirname, "src/components"),
+      "@modals": path.resolve(__dirname, "src/components/modals"),
       "@icons": path.resolve(__dirname, "src/components/icons"),
     },
   },

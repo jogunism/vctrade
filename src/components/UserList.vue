@@ -72,7 +72,10 @@
                     </div>
                     <div>
                       <!-- <span class="block font-medium dark:text-white/90"> -->
-                      <span class="inline-flex font-medium dark:text-white/90">
+                      <span
+                        class="inline-flex font-medium dark:text-white/90 cursor-pointer"
+                        @click="handleUserNameClick(user.userId)"
+                      >
                         {{ user.name.title }}.
                         {{ user.userName }}
                       </span>
@@ -129,18 +132,24 @@
       </div>
     </div>
     <!-- ./body -->
+
+    <!-- Modal -->
+    <DetailModal />
+    <!-- ./Modal -->
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import { mapGetters } from "vuex";
+import emitter from "@lib/emitter";
 // UI Components
 import FavoriteFilter from "@components/common/FavoriteFilter.vue";
 import Dropdown from "@components/common/Dropdown.vue";
 import Searchbox from "@components/common/Searchbox.vue";
 import FavoriteButton from "@components/common/FavoriteButton.vue";
 import ReloadIcon from "@icons/Reload.vue";
+import DetailModal from "@modals/UserDetail.vue";
 // Utils
 import { capitalizeFirstLetter } from "@utils/string.utils";
 
@@ -159,6 +168,7 @@ export default Vue.extend({
     Searchbox,
     FavoriteButton,
     ReloadIcon,
+    DetailModal,
   },
   mounted() {
     if (this.userList.length < 1) {
@@ -171,7 +181,6 @@ export default Vue.extend({
         results: 25,
       },
       genderList: ["All", "Male", "Female"],
-      favoriteList: ["All", "Favorite"],
     };
   },
   methods: {
@@ -183,6 +192,9 @@ export default Vue.extend({
     },
     handleMoreButtonClick() {
       this.fetchUserList();
+    },
+    handleUserNameClick(userId: string) {
+      emitter.emit("detail_modal", userId);
     },
 
     displayGender(gender: string): String {

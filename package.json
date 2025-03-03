@@ -21,6 +21,7 @@
     "@tailwindcss/vite": "^4.0.9",
     "@vitejs/plugin-vue2": "^2.3.3",
     "axios": "^1.8.1",
+    "mitt": "^3.0.1",
     "tailwindcss": "^4.0.9",
     "vue": "^2.7.16",
     "vue-router": "^3.6.5",

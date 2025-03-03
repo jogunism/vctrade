@@ -1,6 +1,9 @@
 // UserState
 import Vue from "vue";
 import { services } from "@store/api";
+// Utils
+import { capitalizeFirstLetter } from "@utils/string.utils";
+// Constants
 import {
   User,
   UserState,
@@ -8,28 +11,31 @@ import {
   UserListFilterParameter,
   UserListFilter,
 } from "@src/constants";
-import { capitalizeFirstLetter } from "@utils/string.utils";
 
-/**
+/*************************************************
  * STATE
  */
 const state: UserState = {
   isLoading: false,
   userListOrigin: [],
   userList: [],
-  filter: {},
+  filter: {} as UserListFilter,
+
+  currentUser: {} as User,
 };
 
-/**
+/*************************************************
  * GETTERS
  */
 const getters = {
   isLoading: (state: UserState) => state.isLoading,
   userList: (state: UserState) => state.userList,
   filter: (state: UserState) => state.filter,
+
+  currentUser: (state: UserState) => state.currentUser,
 };
 
-/**
+/*************************************************
  * ACTIONS
  */
 const actions = {
@@ -79,9 +85,13 @@ const actions = {
     // console.log(_filter);
     commit("filterUserList", _filter);
   },
+
+  getUserDetail({ commit }: { commit: Function }, userId: string) {
+    commit("getUserDetail", userId);
+  },
 };
 
-/**
+/*************************************************
  * MUTATIONS
  */
 const mutations = {
@@ -137,6 +147,16 @@ const mutations = {
 
     state.filter = filter;
     state.userList = _filtered;
+  },
+
+  getUserDetail(state: UserState, userId: string) {
+    const _list = [...state.userList];
+
+    const _userList = _list.filter((user: User) => {
+      return user.userId === userId;
+    });
+
+    state.currentUser = _userList[0] ?? ({} as User);
   },
 };
 

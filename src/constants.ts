@@ -1,16 +1,18 @@
 // constants
-
+/**
+ * Types
+ */
 export interface UserState {
   isLoading: boolean;
   userListOrigin: Array<User>;
   userList: Array<User>;
   filter: UserListFilter;
+
+  currentUser: User;
 }
 
 export interface UserListFetchParameters {
   results: number;
-  // name?: String;
-  // gender?: String;
 }
 
 export interface UserListFilterParameter {
@@ -28,8 +30,9 @@ export interface UserListFetchResults {
   results: Array<User>;
 }
 
-// interface
-
+/**
+ * Randomuser API types
+ */
 export interface UserNameDetail {
   title: string;
   first: string;

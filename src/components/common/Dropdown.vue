@@ -37,9 +37,11 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapGetters } from "vuex";
+// UI Components
 import ChevronDownIcon from "@icons/ChevronDown.vue";
 // Utils
 import { capitalizeFirstLetter } from "@utils/string.utils";
+import { UserListFilter } from "@src/constants";
 
 export default Vue.extend({
   name: "dropdown_menu",
@@ -65,7 +67,7 @@ export default Vue.extend({
     }),
   },
   watch: {
-    filter(newFilter) {
+    filter(newFilter: UserListFilter) {
       this.currentValue = !newFilter.gender
         ? "Gender"
         : capitalizeFirstLetter(newFilter.gender);
