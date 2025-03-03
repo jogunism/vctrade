@@ -1,5 +1,4 @@
-// constants
-/**
+/*************************************************
  * User Types
  */
 export interface UserState {
@@ -114,11 +113,20 @@ export interface User {
   tags: Array<string>;
 }
 
-/**
+/*************************************************
  * Chart Types
  */
-export interface ChartState {
-  isLoading: boolean;
+export interface ChartDataset {
+  backgroundColor: Array<string>;
+  data: Array<number>;
+}
 
-  chartData: Array<User>;
+export interface ChartData {
+  labels: Array<string>;
+  datasets: Array<ChartDataset>;
+}
+
+export interface ChartState {
+  userListOrigin: Array<User>;
+  chartData: ChartData;
 }
