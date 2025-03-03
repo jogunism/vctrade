@@ -33,11 +33,12 @@
         <ul class="mb-2 flex flex-wrap gap-2">
           <li
             class="relative pl-3 pr-8 py-1 border border-blue-200 bg-blue-100 rounded-lg"
+            v-for="(tag, index) in user.tags"
           >
-            <span>#tagtagtagtag</span>
+            <span :key="index">#{{ tag }}</span>
             <button
               class="absolute right-2 top-1/2 transform -translate-y-1/2 hover:text-red-700 focus:outline-none cursor-pointer"
-              @click="handleTagDeleteButtonClick(1)"
+              @click="handleTagDeleteButtonClick(index)"
             >
               <XMarkIcon class="w-4 h-4" />
             </button>
@@ -48,7 +49,8 @@
           type="text"
           placeholder="tag"
           maxlength="30"
-          @keyup.enter="handleEnterKeyup"
+          v-model="inputValue"
+          @keyup="handleKeyup"
         />
       </div>
     </div>
@@ -86,6 +88,7 @@ export default Vue.extend({
     return {
       isVisible: false,
       user: {} as User,
+      inputValue: "",
     };
   },
   mounted() {
@@ -95,12 +98,21 @@ export default Vue.extend({
       this.$store.dispatch("user/getUserDetail", userId);
     });
   },
+  beforeDestroy() {
+    emitter.off("detail_modal");
+  },
   methods: {
-    handleEnterKeyup() {
-      // todo
+    handleKeyup(event: KeyboardEvent) {
+      if (event.key === "Enter" || event.key === ",") {
+        const _tag = (event.target as HTMLInputElement).value;
+
+        this.$store.dispatch("user/addUserTag", _tag.replace(",", ""));
+
+        this.inputValue = "";
+      }
     },
     handleTagDeleteButtonClick(index: number) {
-      console.log(index);
+      this.$store.dispatch("user/deleteUserTag", index);
     },
   },
 });

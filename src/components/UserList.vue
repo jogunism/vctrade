@@ -85,15 +85,20 @@
                         <small>( {{ displayGenderForSM(user.gender) }} )</small>
                       </span>
                       <span
-                        class="block text-gray-500 text-theme-xs dark:text-gray-400"
-                        v-if="user.tags?.length > 0"
-                      >
-                        {{ user.tags }}
-                      </span>
-                      <span
                         class="block text-gray-500 text-theme-xs dark:text-gray-400 sm:hidden"
                       >
                         {{ user.email }}
+                      </span>
+                      <span
+                        class="block text-gray-500 text-theme-xs dark:text-gray-400"
+                        v-if="user.tags?.length > 0"
+                      >
+                        <span
+                          class="inline-flex gap-1 mr-1"
+                          v-for="tag in user.tags"
+                        >
+                          #{{ tag }}
+                        </span>
                       </span>
                     </div>
                   </div>

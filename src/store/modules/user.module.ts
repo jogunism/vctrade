@@ -89,6 +89,13 @@ const actions = {
   getUserDetail({ commit }: { commit: Function }, userId: string) {
     commit("getUserDetail", userId);
   },
+
+  addUserTag({ commit }: { commit: Function }, tag: string) {
+    commit("addUserTag", tag);
+  },
+  deleteUserTag({ commit }: { commit: Function }, index: number) {
+    commit("deleteUserTag", index);
+  },
 };
 
 /*************************************************
@@ -157,6 +164,13 @@ const mutations = {
     });
 
     state.currentUser = _userList[0] ?? ({} as User);
+  },
+
+  addUserTag(state: UserState, tag: string) {
+    state.currentUser.tags.push(tag);
+  },
+  deleteUserTag(state: UserState, index: number) {
+    state.currentUser.tags.splice(index, 1);
   },
 };
 
