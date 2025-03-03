@@ -13,9 +13,9 @@
     <!-- ./header -->
     <!-- body -->
     <div
-      class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]"
+      class="rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03] h-auto overflow-auto"
     >
-      <div class="p-5 max-w-full overflow-x-auto h-200">
+      <div class="p-5 max-w-full overflow-x-auto">
         <div>
           <p>
             <a
@@ -65,7 +65,7 @@
           </p>
         </div>
         <div class="p-10 w-full h-full">
-          <Pie :data="data" :options="options" />
+          <Pie class="h-200" :data="data" :options="options" />
         </div>
       </div>
     </div>
