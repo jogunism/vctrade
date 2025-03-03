@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es5", // Vue 2는 ES5를 지원합니다.
+    "lib": ["dom", "esnext"], // DOM과 최신 JavaScript 기능을 포함
+    "module": "esnext", // ES 모듈 사용
+    "moduleResolution": "node", // Node 방식 모듈 해석
+    "strict": true, // 엄격한 타입 검사
+    "noUnusedLocals": true, // 사용하지 않는 로컬 변수 경고
+    "noUnusedParameters": true, // 사용하지 않는 파라미터 경고
+    "esModuleInterop": true, // ES6 모듈 호환성
+    "skipLibCheck": true, // 라이브러리 타입 검사 건너뛰기
+    "forceConsistentCasingInFileNames": true, // 파일명 대소문자 일관성 강제
+    "jsx": "preserve", // JSX를 그대로 보존
+    "types": ["webpack-env", "vue"], // Webpack과 Vue 타입 포함
+    "allowJs": true // JavaScript 파일도 포함
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts"],
+  "exclude": ["node_modules"]
+}
