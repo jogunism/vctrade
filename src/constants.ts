@@ -1,6 +1,6 @@
 // constants
 /**
- * Types
+ * User Types
  */
 export interface UserState {
   isLoading: boolean;
@@ -112,4 +112,13 @@ export interface User {
   userName: string;
   isFavorite: boolean;
   tags: Array<string>;
+}
+
+/**
+ * Chart Types
+ */
+export interface ChartState {
+  isLoading: boolean;
+
+  chartData: Array<User>;
 }

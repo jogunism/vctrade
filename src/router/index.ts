@@ -2,7 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import UserList from "../components/UserList.vue";
-import HelloWorld from "../components/HelloWorld.vue";
+import UserChart from "../components/UserChart.vue";
 
 Vue.use(Router);
 
@@ -11,13 +11,13 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "userlist",
+      name: "list",
       component: UserList,
     },
     {
-      path: "/hello",
-      name: "hello",
-      component: HelloWorld,
+      path: "/chart",
+      name: "chart",
+      component: UserChart,
     },
   ],
 });

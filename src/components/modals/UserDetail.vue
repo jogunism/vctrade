@@ -6,25 +6,25 @@
       </div>
       <div class="row-span-1 col-span-2 space-y-1">
         <h2 class="font-bold">NAME</h2>
-        <p>{{ user?.userName }}</p>
+        <p>{{ user?.userName ?? "-" }}</p>
       </div>
 
       <div class="row-span-1 col-span-2 space-y-1">
         <h2 class="font-bold">ID</h2>
-        <p>{{ user?.id?.name }} {{ user?.id?.value }}</p>
+        <p>{{ user?.id?.name ?? "-" }} {{ user?.id?.value ?? "-" }}</p>
       </div>
       <div class="row-span-1 col-span-2 space-y-1">
         <h2 class="font-bold">LOCATION</h2>
         <p>
-          {{ user?.location?.street?.number }}
-          {{ user?.location?.street?.name }} {{ user?.location?.city }}
-          {{ user?.location?.state }},
-          {{ user?.location?.postcode }}
+          {{ user?.location?.street?.number ?? "-" }}
+          {{ user?.location?.street?.name ?? "-" }}
+          {{ user?.location?.city ?? "-" }} {{ user?.location?.state ?? "-" }},
+          {{ user?.location?.postcode ?? "-" }}
         </p>
       </div>
       <div class="row-span-1 col-span-2 space-y-1">
         <h2 class="font-bold">PHONE</h2>
-        <p>{{ user?.phone }}</p>
+        <p>{{ user?.phone ?? "-" }}</p>
       </div>
     </div>
     <div class="p-2">

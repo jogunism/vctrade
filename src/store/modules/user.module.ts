@@ -1,4 +1,3 @@
-// UserState
 import Vue from "vue";
 import { services } from "@store/api";
 // Utils

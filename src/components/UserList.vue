@@ -1,5 +1,9 @@
 <template>
   <div class="mx-auto max-w-(--breakpoint-2xl) md:p-6">
+    <!-- link -->
+    <a href="/" class="mr-3 text-white text-lg font-bold underline">LIST</a>
+    <a href="/chart" class="text-white text-lg font-bold underline">CHART</a>
+    <!-- ./link -->
     <!-- header -->
     <div class="sm:py-5 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-0">
       <div class="self-center flex">
@@ -17,13 +21,8 @@
       </div>
       <div class="flex justify-start sm:justify-end">
         <FavoriteFilter />
-        <Dropdown
-          class="mr-1 w-25"
-          :id="'gender'"
-          :title="'Gender'"
-          :list="genderList"
-        />
-        <Searchbox />
+        <GenderFilter class="mr-1 w-25" :title="'Gender'" :list="genderList" />
+        <NameFilter />
       </div>
     </div>
     <!-- ./header -->
@@ -71,7 +70,6 @@
                       <img :src="user.picture.thumbnail" alt="user" />
                     </div>
                     <div>
-                      <!-- <span class="block font-medium dark:text-white/90"> -->
                       <span
                         class="inline-flex font-medium dark:text-white/90 cursor-pointer"
                         @click="handleUserNameClick(user.userId)"
@@ -150,8 +148,8 @@ import { mapGetters } from "vuex";
 import emitter from "@lib/emitter";
 // UI Components
 import FavoriteFilter from "@components/common/FavoriteFilter.vue";
-import Dropdown from "@components/common/Dropdown.vue";
-import Searchbox from "@components/common/Searchbox.vue";
+import GenderFilter from "@components/common/Dropdown.vue";
+import NameFilter from "@components/common/Searchbox.vue";
 import FavoriteButton from "@components/common/FavoriteButton.vue";
 import ReloadIcon from "@icons/Reload.vue";
 import DetailModal from "@modals/UserDetail.vue";
@@ -169,8 +167,8 @@ export default Vue.extend({
   },
   components: {
     FavoriteFilter,
-    Dropdown,
-    Searchbox,
+    GenderFilter,
+    NameFilter,
     FavoriteButton,
     ReloadIcon,
     DetailModal,
