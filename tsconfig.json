@@ -3,7 +3,7 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "target": "es6",
-    "module": "commonjs",
+    "module": "ESNext",
     "jsx": "preserve",
     "strict": true,
     "noUnusedLocals": true,

@@ -14,7 +14,7 @@ export interface RootState {
   chart: ChartState;
 }
 
-export const store = new Vuex.Store({
+export default new Vuex.Store({
   modules: {
     user,
     chart,
@@ -27,5 +27,3 @@ export const store = new Vuex.Store({
     }),
   ],
 });
-
-export default store;
