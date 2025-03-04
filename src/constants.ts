@@ -94,23 +94,23 @@ export interface UserPictureDetail {
 }
 
 export interface User {
-  gender: string;
-  name: UserNameDetail;
-  location: UserLocationDetail;
+  gender?: string;
+  name?: UserNameDetail;
+  location?: UserLocationDetail;
   email: string;
-  login: UserLoginDetail;
-  dob: UserBobDetail;
-  registered: UserRegisterdDetail;
-  phone: string;
-  cell: string;
-  id: UserIdDetail;
-  picture: UserPictureDetail;
-  nat: string;
+  login?: UserLoginDetail;
+  dob?: UserBobDetail;
+  registered?: UserRegisterdDetail;
+  phone?: string;
+  cell?: string;
+  id?: UserIdDetail;
+  picture?: UserPictureDetail;
+  nat?: string;
 
   userId: string;
-  userName: string;
-  isFavorite: boolean;
-  tags: Array<string>;
+  userName?: string;
+  isFavorite?: boolean;
+  tags?: Array<string>;
 }
 
 /*************************************************

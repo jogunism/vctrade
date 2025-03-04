@@ -17,7 +17,7 @@ import {
 const state: UserState = {
   isLoading: false,
   userListOrigin: [],
-  userList: [],
+  userList: [] as Array<User>,
   filter: {} as UserListFilter,
 
   currentUser: {} as User,
@@ -111,9 +111,9 @@ const mutations = {
       Vue.set(
         user,
         "userName",
-        capitalizeFirstLetter(user.name.first) +
+        capitalizeFirstLetter(user.name?.first ?? "") +
           " " +
-          capitalizeFirstLetter(user.name.last)
+          capitalizeFirstLetter(user.name?.last ?? "")
       );
       Vue.set(user, "isFavorite", false);
       Vue.set(user, "tags", []);
@@ -147,7 +147,7 @@ const mutations = {
         (!filter.gender || (filter.gender && user.gender === filter.gender)) &&
         (!filter.name ||
           (filter.name &&
-            user.userName.toLocaleLowerCase().includes(filter.name)))
+            user.userName?.toLocaleLowerCase().includes(filter.name)))
       );
     });
 
@@ -166,10 +166,10 @@ const mutations = {
   },
 
   addUserTag(state: UserState, tag: string) {
-    state.currentUser.tags.push(tag);
+    state.currentUser.tags?.push(tag);
   },
   deleteUserTag(state: UserState, index: number) {
-    state.currentUser.tags.splice(index, 1);
+    state.currentUser.tags?.splice(index, 1);
   },
 };
 
