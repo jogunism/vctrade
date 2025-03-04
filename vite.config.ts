@@ -6,6 +6,7 @@ import path from "path";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
+  base: "/",
   resolve: {
     alias: {
       vue: "vue/dist/vue.esm.js",
