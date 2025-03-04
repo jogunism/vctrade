@@ -1,8 +1,18 @@
 <template>
   <div class="mx-auto max-w-(--breakpoint-2xl) md:p-6">
     <!-- link -->
-    <a href="/" class="mr-3 text-white text-lg font-bold underline">LIST</a>
-    <a href="/chart" class="text-white text-lg font-bold underline">CHART</a>
+    <button
+      class="mr-3 text-white text-lg font-bold underline"
+      @click="$router.push('/')"
+    >
+      LIST
+    </button>
+    <button
+      class="text-white text-lg font-bold underline"
+      @click="$router.push('/chart')"
+    >
+      CHART
+    </button>
     <!-- ./link -->
     <!-- header -->
     <div class="sm:py-5 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-0">
