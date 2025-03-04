@@ -29,26 +29,28 @@ export const getNationality = (
   const totalUsers = users.length;
   const natCount: Record<string, number> = {};
 
-  // 국가별 유저 수 세기
+  // Count users country
   users.forEach((user) => {
+    if (!user.nat) {
+      return;
+    }
     natCount[user.nat] = (natCount[user.nat] || 0) + 1;
   });
 
-  // 국가 리스트와 비율 계산
+  // List countries and calculate percentages
   const natList = Object.keys(natCount);
   const natPercentages = natList.map((nat) =>
     parseFloat(((natCount[nat] / totalUsers) * 100).toFixed(1))
   );
 
-  // 전체 퍼센트가 100이 되도록 오차 보정
+  // Should all sum value 100%
   const sum = natPercentages.reduce((acc, curr) => acc + curr, 0);
   const adjustedPercentages = natPercentages.map(
     (percentage) => (percentage / sum) * 100
   );
 
-  console.log(natList);
-  console.log(adjustedPercentages);
-
+  // console.log(natList);
+  // console.log(adjustedPercentages);
   return { natList, natPercentages: adjustedPercentages };
 };
 
@@ -58,8 +60,11 @@ export const getGender = (
   const totalUsers = users.length;
   const genderCount: Record<string, number> = {};
 
-  // genderCount 계산
+  // Count gender
   users.forEach((user) => {
+    if (!user.gender) {
+      return;
+    }
     genderCount[user.gender] = (genderCount[user.gender] || 0) + 1;
   });
 
@@ -68,15 +73,14 @@ export const getGender = (
     parseFloat(((genderCount[gender] / totalUsers) * 100).toFixed(1))
   );
 
-  // 전체 퍼센트가 100이 되도록 오차 보정
+  // Should all sum value 100%
   const sum = genderPercentages.reduce((acc, curr) => acc + curr, 0);
   const adjustedPercentages = genderPercentages.map(
     (percentage) => (percentage / sum) * 100
   );
 
-  console.log(genderList);
-  console.log(adjustedPercentages);
-
+  // console.log(genderList);
+  // console.log(adjustedPercentages);
   return { genderList, genderPercentages: adjustedPercentages };
 };
 
@@ -86,9 +90,12 @@ export const getAgeGroup = (
   const totalUsers = users.length;
   const ageCount: Record<string, number> = {};
 
-  // 나이 범위를 5년 단위로 구분
+  // Ages seperations of 5 year
   users.forEach((user) => {
-    const age = user.registered.age;
+    const age = user.registered?.age ?? -1;
+    if (age < 0) {
+      return;
+    }
     const ageGroup = `${Math.floor(age / 5) * 5}-${
       Math.floor(age / 5) * 5 + 4
     }`;
@@ -101,15 +108,14 @@ export const getAgeGroup = (
     parseFloat(((ageCount[ageGroup] / totalUsers) * 100).toFixed(1))
   );
 
-  // 전체 퍼센트가 100이 되도록 오차 보정
+  // Should all sum value 100%
   const sum = agePercentages.reduce((acc, curr) => acc + curr, 0);
   const adjustedPercentages = agePercentages.map(
     (percentage) => (percentage / sum) * 100
   );
 
-  console.log(ageGroups);
-  console.log(adjustedPercentages);
-
+  // console.log(ageGroups);
+  // console.log(adjustedPercentages);
   return { ageGroups, agePercentages: adjustedPercentages };
 };
 
@@ -119,9 +125,9 @@ export const getTags = (
   const totalUsers = users.length;
   const tagCount: Record<string, number> = {};
 
-  // 각 유저의 tags 배열을 순회하여 각 태그의 개수를 셈
+  // Count all user's tags
   users.forEach((user) => {
-    user.tags.forEach((tag) => {
+    user.tags?.forEach((tag) => {
       console.log(`${user.userName}, ${tag}`);
       tagCount[tag] = (tagCount[tag] || 0) + 1;
     });
@@ -129,19 +135,18 @@ export const getTags = (
 
   const tags = Object.keys(tagCount);
 
-  // 각 태그의 퍼센트 계산
+  // Calcurate each tag's percentages
   const tagPercentages = tags.map((tag) =>
     parseFloat(((tagCount[tag] / totalUsers) * 100).toFixed(1))
   );
 
-  // 전체 퍼센트가 100이 되도록 하기 위해서 비율 재조정 (오차 보정)
+  // Should all sum value 100%
   const sum = tagPercentages.reduce((acc, curr) => acc + curr, 0);
   const adjustedPercentages = tagPercentages.map(
     (percentage) => (percentage / sum) * 100
   );
 
-  console.log(tags);
-  console.log(adjustedPercentages);
-
+  // console.log(tags);
+  // console.log(adjustedPercentages);
   return { tags, tagPercentages: adjustedPercentages };
 };
