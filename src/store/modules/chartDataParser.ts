@@ -128,22 +128,22 @@ export const getTags = (
   // Count all user's tags
   users.forEach((user) => {
     user.tags?.forEach((tag) => {
-      console.log(`${user.userName}, ${tag}`);
+      // console.log(`${user.userName}, ${tag}`);
       tagCount[tag] = (tagCount[tag] || 0) + 1;
     });
   });
 
   const tags = Object.keys(tagCount);
 
-  // Calcurate each tag's percentages
+  // Calculate each tag's percentages
   const tagPercentages = tags.map((tag) =>
     parseFloat(((tagCount[tag] / totalUsers) * 100).toFixed(1))
   );
 
-  // Should all sum value 100%
+  // Ensure all sum up to 100%
   const sum = tagPercentages.reduce((acc, curr) => acc + curr, 0);
-  const adjustedPercentages = tagPercentages.map(
-    (percentage) => (percentage / sum) * 100
+  const adjustedPercentages = tagPercentages.map((percentage) =>
+    parseFloat(((percentage / sum) * 100).toFixed(1))
   );
 
   // console.log(tags);
