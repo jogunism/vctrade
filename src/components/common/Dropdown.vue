@@ -94,7 +94,7 @@ export default Vue.extend({
       this.toggleDropdown();
 
       this.$store.dispatch("user/filterUserList", {
-        id: this.$props.id,
+        id: "gender",
         value: text.toLowerCase(),
       });
     },
