@@ -1,7 +1,13 @@
 // import Vue from "vue";
 import { ActionContext } from "vuex";
 import { RootState } from "../index";
-import { User, ChartData, ChartState, ChartDataset } from "@src/constants";
+import {
+  User,
+  ChartData,
+  ChartState,
+  ChartDataset,
+  DatasetType,
+} from "@src/constants";
 
 import {
   colors,
@@ -52,16 +58,17 @@ const actions = {
 const mutations = {
   initUserData(state: ChartState, data: Array<User>) {
     state.userListOrigin = data;
-    console.log(data);
+    // console.log(data);
   },
 
   makeDataset(state: ChartState, type: string) {
     let labels = [] as Array<string>;
-    const datasets = [];
-
-    const backgroundColor = [];
+    const backgroundColor = [] as Array<string>;
+    const datasets = [] as Array<DatasetType>;
     const borderColor = ["#202937"];
     const borderWidth = 1;
+
+    let _data = [] as Array<number>;
 
     switch (type) {
       case "country":
@@ -70,12 +77,7 @@ const mutations = {
         for (let i = 0; i <= labels.length; i++) {
           backgroundColor.push(colors[i]);
         }
-        datasets.push({
-          data: nationality.natPercentages,
-          backgroundColor,
-          borderColor,
-          borderWidth,
-        });
+        _data = nationality.natPercentages;
         break;
 
       case "gender":
@@ -85,12 +87,7 @@ const mutations = {
         for (let i = 0; i <= labels.length; i++) {
           backgroundColor.push(colors[i]);
         }
-        datasets.push({
-          data: gender.genderPercentages,
-          backgroundColor,
-          borderColor,
-          borderWidth,
-        });
+        _data = gender.genderPercentages;
         break;
 
       case "age":
@@ -99,12 +96,7 @@ const mutations = {
         for (let i = 0; i <= labels.length; i++) {
           backgroundColor.push(colors[i]);
         }
-        datasets.push({
-          data: age.agePercentages,
-          backgroundColor,
-          borderColor,
-          borderWidth,
-        });
+        _data = age.agePercentages;
         break;
 
       case "tags":
@@ -113,14 +105,16 @@ const mutations = {
         for (let i = 0; i <= labels.length; i++) {
           backgroundColor.push(colors[i]);
         }
-        datasets.push({
-          data: tags.tagPercentages,
-          backgroundColor,
-          borderColor,
-          borderWidth,
-        });
+        _data = tags.tagPercentages;
         break;
     }
+
+    datasets.push({
+      data: _data,
+      backgroundColor,
+      borderColor,
+      borderWidth,
+    });
 
     state.chartData = {
       labels,

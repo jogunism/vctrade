@@ -130,3 +130,10 @@ export interface ChartState {
   userListOrigin: Array<User>;
   chartData: ChartData;
 }
+
+export interface DatasetType {
+  data: Array<number>;
+  backgroundColor: Array<string>;
+  borderColor: Array<string>;
+  borderWidth: number;
+}
