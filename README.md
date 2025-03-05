@@ -2,31 +2,25 @@
 
 ## Project setting
 
-### 1. dependencies
+### 1. Install dependencies
 
 ```sh
 npm install
 ```
 
-### 2. Dev server setting
+### 2. Development
 
 ```sh
 npm run dev
 ```
 
-### 3. Build
+### 3. Test
 
 ```sh
-npm run build
+npm test
 ```
 
-### 5. Test
-
-```sh
-npm run test
-```
-
-## Project
+## Project files
 
 ```
 /vctrade
@@ -54,3 +48,4 @@ npm run test
 - **Axios**
 - **Jest**
 - **Vite**
+- **Typescript**
